@@ -1,6 +1,8 @@
 package rpc;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import entity.Item;
+import external.ExternalAPI;
+import external.ExternalAPIFactory;
 
 /**
  * Servlet implementation class SearchItem
@@ -34,6 +39,24 @@ public class SearchItem extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		double latitude = Double.parseDouble(request.getParameter("lat"));
+		double longitude = Double.parseDouble(request.getParameter("lon"));
+		//Term can be empty or null
+		String term = request.getParameter("term");
+		ExternalAPI externalAPI =ExternalAPIFactory.getExternalAPI();
+		List<Item> items = externalAPI.search(latitude, longitude, term);
+		List<JSONObject> list = new ArrayList<>();
+		try {
+			for (Item item : items) {
+				// Add a thin version of item object
+				JSONObject obj = item.toJSONObject();
+				list.add(obj);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		JSONArray array = new JSONArray(list);
+		RpcHelper.writeJsonArray(response, array);
 //		/*
 //		 * TEST CONNECTION
 //		 */
@@ -60,13 +83,15 @@ public class SearchItem extends HttpServlet {
 //		out.flush(); // Flush the output stream and send the data to the client side
 //		out.close(); // Close this response
 		
-		JSONArray array = new JSONArray();
-		try {
-			array.put(new JSONObject().put("username", "abcd"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		RpcHelper.writeJsonArray(response, array);
+//		JSONArray array = new JSONArray();
+//		try {
+//			array.put(new JSONObject().put("username", "abcd"));
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
+//		RpcHelper.writeJsonArray(response, array);
+		
+		
 	}
 
 	/**
