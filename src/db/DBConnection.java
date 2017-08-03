@@ -33,7 +33,15 @@ public interface DBConnection {
 	 * 	@param userId
 	 * 	@param items
 	 */
-	public Set<Item> getFacoriteItems (String userId);
+	public Set<Item> getFacoriteItemIds (String userId);
+	
+	/**
+	 *  Get the favorite items for a user
+	 *  
+	 *  @param userId
+	 *  @return items
+	 */
+	public Set<Item> getFavoriteItems (String userId);
 	
 	/**
 	 * 	Gets categories based on item id
