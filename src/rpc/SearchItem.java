@@ -52,9 +52,9 @@ public class SearchItem extends HttpServlet {
 //		List<Item> items = externalAPI.search(latitude, longitude, term);
 		List<JSONObject> list = new ArrayList<>();
 		try {
-			for (Item i : items) {
+			for (Item item : items) {
 				// Add a thin version of item object
-				JSONObject obj = i.toJSONObject();
+				JSONObject obj = item.toJSONObject();
 				list.add(obj);
 			}
 		} catch (Exception e) {

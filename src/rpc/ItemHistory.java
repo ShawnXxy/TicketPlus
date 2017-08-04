@@ -45,8 +45,8 @@ public class ItemHistory extends HttpServlet {
 		String userId = request.getParameter("user_id");
 		Set<Item> items = conn.getFavoriteItems(userId);
 		JSONArray  array = new JSONArray();
-		for (Item i : items) {
-			JSONObject obj = i.toJSONObject();
+		for (Item item : items) {
+			JSONObject obj = item.toJSONObject();
 			try {
 				obj.append("favorite", true);
 			} catch (JSONException e) {
@@ -104,7 +104,7 @@ public class ItemHistory extends HttpServlet {
 				String itemId = (String) array.get(i);
 				histories.add(itemId);
 			}
-			conn.unsetFacoriteItems(userId, histories);
+			conn.unsetFavoriteItems(userId, histories);
 			RpcHelper.writeJsonObject(response, new JSONObject().put("result", "SUCESS"));
 		} catch (JSONException e) {
 			e.printStackTrace();

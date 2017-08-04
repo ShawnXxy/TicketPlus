@@ -25,7 +25,7 @@ public interface DBConnection {
 	 * 	@param userId
 	 * 	@param itemIds
 	 */
-	public void unsetFacoriteItems (String userId, List<String> itemIds);
+	public void unsetFavoriteItems (String userId, List<String> itemIds);
 	
 	/**
 	 * 	Get the favorite item id for a user
@@ -33,7 +33,7 @@ public interface DBConnection {
 	 * 	@param userId
 	 * 	@param items
 	 */
-	public Set<Item> getFacoriteItemIds (String userId);
+	public Set<String> getFavoriteItemIds (String userId);
 	
 	/**
 	 *  Get the favorite items for a user
