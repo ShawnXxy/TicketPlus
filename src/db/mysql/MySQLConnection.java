@@ -19,35 +19,37 @@ import external.ExternalAPIFactory;
 // This is a singleton pattern
 public class MySQLConnection implements DBConnection {
 	private static MySQLConnection instance;
-	
+
 	public static DBConnection getInstance() {
 		if (instance == null) {
-			instance  = new MySQLConnection();
+			instance = new MySQLConnection();
 		}
 		return instance;
 	}
-	
+
 	private Connection conn = null;
-	
+
 	private MySQLConnection() {
 		try {
-			// Forcing the class representing the MySQL driver to load and initialize
-			// The new Instance() call is a work around for some broken Java implementations
+			// Forcing the class representing the MySQL driver to load and
+			// initialize
+			// The new Instance() call is a work around for some broken Java
+			// implementations
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection(MySQLDBUtil.URL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-		
+
 	@Override
 	public void close() {
 		// TODO Auto-generated method stub
 		if (conn != null) {
 			try {
 				conn.close();
-			} catch (Exception e) { //ignored
-				
+			} catch (Exception e) { // ignored
+
 			}
 		}
 	}
@@ -87,8 +89,8 @@ public class MySQLConnection implements DBConnection {
 	@Override
 	public Set<String> getCategories(String itemId) {
 		// TODO Auto-generated method stub
-//		return null;
-		
+		// return null;
+
 		Set<String> categories = new HashSet<>();
 		try {
 			String sql = "SELECT category from categories WHERE item_id = ?";
@@ -107,8 +109,8 @@ public class MySQLConnection implements DBConnection {
 	@Override
 	public List<Item> searchItems(String userId, double latitude, double longitude, String term) {
 		// TODO Auto-generated method stub
-//		return null;
-		
+		// return null;
+
 		// Connect to external API
 		ExternalAPI api = ExternalAPIFactory.getExternalAPI();
 		List<Item> items = api.search(latitude, longitude, term);
@@ -125,7 +127,7 @@ public class MySQLConnection implements DBConnection {
 		try {
 			// 1st, insert into items table
 			String sql = "INSERT IGNORE INTO items VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			
+
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, item.getItemId());
 			statement.setString(2, item.getName());
@@ -143,7 +145,7 @@ public class MySQLConnection implements DBConnection {
 			statement.setString(14, item.getImageUrl());
 			statement.setString(15, item.getUrl());
 			statement.execute();
-			
+
 			// 2nd, update categories table for each categories
 			sql = "INSERT IGNORE INTO categories VALUES (?, ?)";
 			for (String category : item.getCategories()) {
@@ -160,8 +162,8 @@ public class MySQLConnection implements DBConnection {
 	@Override
 	public Set<String> getFavoriteItemIds(String userId) {
 		// TODO Auto-generated method stub
-//		return null;
-		
+		// return null;
+
 		Set<String> favoriteItems = new HashSet<>();
 		try {
 			String sql = "SELECT item_id from history WHERE user_id = ?";
@@ -181,7 +183,7 @@ public class MySQLConnection implements DBConnection {
 	@Override
 	public Set<Item> getFavoriteItems(String userId) {
 		// TODO Auto-generated method stub
-//		return null;
+		// return null;
 		Set<String> itemIds = getFavoriteItemIds(userId);
 		Set<Item> favoriteItems = new HashSet<>();
 		try {
@@ -191,11 +193,12 @@ public class MySQLConnection implements DBConnection {
 				statement.setString(1, itemId);
 				ResultSet rs = statement.executeQuery();
 				ItemBuilder builder = new ItemBuilder();
-				
-				// Because itemId is unique and given one item id there should have only one result returned
+
+				// Because itemId is unique and given one item id there should
+				// have only one result returned
 				if (rs.next()) {
 					builder.setItemId(rs.getString("item_id"));
-					builder.setNames(rs.getString("name"));
+					builder.setName(rs.getString("name"));
 					builder.setCity(rs.getString("city"));
 					builder.setState(rs.getString("state"));
 					builder.setCountry(rs.getString("country"));
@@ -210,12 +213,12 @@ public class MySQLConnection implements DBConnection {
 					builder.setImageUrl(rs.getString("image_url"));
 					builder.setUrl(rs.getString("url"));
 				}
-				
+
 				// Join categories information into builder
 				sql = "SELECT * from categories WHERE item_id = ?";
 				statement = conn.prepareStatement(sql);
 				statement.setString(1, itemId);
-				rs =  statement.executeQuery();
+				rs = statement.executeQuery();
 				Set<String> categories = new HashSet<>();
 				while (rs.next()) {
 					categories.add(rs.getString("category"));

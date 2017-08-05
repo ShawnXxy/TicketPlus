@@ -23,7 +23,7 @@ public class Item {
 	private String url;
 	private String snippet;
 	private String snippetUrl;
-	
+
 	// convert an item object to a JSON object instance
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();
@@ -47,11 +47,13 @@ public class Item {
 		}
 		return obj;
 	}
-	
+
 	/**
-	 * 	Builder pattern
-	 * 	builds a complex object using simple objects and using a step by step approach. It separates the construction of a complex object from its representation so that the same construction process can create different representations
-	 * 	
+	 * Builder pattern builds a complex object using simple objects and using a
+	 * step by step approach. It separates the construction of a complex object
+	 * from its representation so that the same construction process can create
+	 * different representations
+	 * 
 	 */
 	public Item(ItemBuilder builder) {
 		this.itemId = builder.itemId;
@@ -71,6 +73,7 @@ public class Item {
 		this.snippet = builder.snippet;
 		this.snippetUrl = builder.snippetUrl;
 	}
+
 	public static class ItemBuilder {
 		private String itemId;
 		private String name;
@@ -88,138 +91,152 @@ public class Item {
 		private String url;
 		private String snippet;
 		private String snippetUrl;
-		
-		public ItemBuilder setItemId (String itemId) {
+
+		public ItemBuilder setItemId(String itemId) {
 			this.itemId = itemId;
 			return this;
 		}
-		
-		public ItemBuilder setNames (String name) {
+
+		public ItemBuilder setName(String name) {
 			this.name = name;
 			return this;
 		}
-		
-		public ItemBuilder setRating (double rating) {
+
+		public ItemBuilder setRating(double rating) {
 			this.rating = rating;
 			return this;
 		}
-		
-		public ItemBuilder setAddress (String address) {
+
+		public ItemBuilder setAddress(String address) {
 			this.address = address;
 			return this;
 		}
-		
-		public ItemBuilder setCity (String city) {
+
+		public ItemBuilder setCity(String city) {
 			this.city = city;
 			return this;
 		}
-		
-		public ItemBuilder setCountry (String country) {
+
+		public ItemBuilder setCountry(String country) {
 			this.country = country;
 			return this;
 		}
-		
-		public ItemBuilder setState (String state) {
+
+		public ItemBuilder setState(String state) {
 			this.state = state;
 			return this;
 		}
-		
-		public ItemBuilder setZipcode (String zipcode) {
+
+		public ItemBuilder setZipcode(String zipcode) {
 			this.zipcode = zipcode;
 			return this;
 		}
-		
-		public ItemBuilder setLatitude (double latitude) {
+
+		public ItemBuilder setLatitude(double latitude) {
 			this.latitude = latitude;
 			return this;
 		}
-		
-		public ItemBuilder setLongitude (double longitude) {
+
+		public ItemBuilder setLongitude(double longitude) {
 			this.longitude = longitude;
 			return this;
 		}
-		
-		public ItemBuilder setDescription (String description) {
+
+		public ItemBuilder setDescription(String description) {
 			this.description = description;
 			return this;
 		}
-		
-		public ItemBuilder setCategories (Set<String> categories) {
+
+		public ItemBuilder setCategories(Set<String> categories) {
 			this.categories = categories;
 			return this;
 		}
-		
-		public ItemBuilder setImageUrl (String imageUrl) {
+
+		public ItemBuilder setImageUrl(String imageUrl) {
 			this.imageUrl = imageUrl;
 			return this;
 		}
-		
-		public ItemBuilder setUrl (String url) {
+
+		public ItemBuilder setUrl(String url) {
 			this.url = url;
 			return this;
 		}
-		
-		public ItemBuilder setSnippet (String snippet) {
+
+		public ItemBuilder setSnippet(String snippet) {
 			this.snippet = snippet;
 			return this;
 		}
-		
-		public ItemBuilder setSnippetUrl (String snippetUrl) {
+
+		public ItemBuilder setSnippetUrl(String snippetUrl) {
 			this.snippetUrl = snippetUrl;
 			return this;
 		}
-		
+
 		public Item build() {
 			return new Item(this);
 		}
 	}
-	
-	
+
 	public String getItemId() {
 		return itemId;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public double getRating() {
 		return rating;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public String getCity() {
 		return city;
 	}
+
 	public String getCountry() {
 		return country;
 	}
+
 	public String getState() {
 		return state;
 	}
+
 	public String getZipcode() {
 		return zipcode;
 	}
+
 	public double getLatitude() {
 		return latitude;
 	}
+
 	public double getLongitude() {
 		return longitude;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public Set<String> getCategories() {
 		return categories;
 	}
+
 	public String getImageUrl() {
 		return imageUrl;
 	}
+
 	public String getUrl() {
 		return url;
 	}
+
 	public String getSnippet() {
 		return snippet;
 	}
+
 	public String getSnippetUrl() {
 		return snippetUrl;
 	}
