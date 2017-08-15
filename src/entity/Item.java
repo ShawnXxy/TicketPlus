@@ -55,7 +55,7 @@ public class Item {
 	 * different representations
 	 * 
 	 */
-	public Item(ItemBuilder builder) {
+	private Item(ItemBuilder builder) {
 		this.itemId = builder.itemId;
 		this.name = builder.name;
 		this.rating = builder.rating;

@@ -18,6 +18,7 @@ import external.ExternalAPIFactory;
 
 // This is a singleton pattern
 public class MySQLConnection implements DBConnection {
+    
 	private static MySQLConnection instance;
 
 	public static DBConnection getInstance() {
@@ -31,10 +32,7 @@ public class MySQLConnection implements DBConnection {
 
 	private MySQLConnection() {
 		try {
-			// Forcing the class representing the MySQL driver to load and
-			// initialize
-			// The new Instance() call is a work around for some broken Java
-			// implementations
+			// Forcing the class representing the MySQL driver to load and initialize¡£ The new Instance() call is a work around for some broken Java implementations
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection(MySQLDBUtil.URL);
 		} catch (Exception e) {
@@ -183,7 +181,8 @@ public class MySQLConnection implements DBConnection {
 	@Override
 	public Set<Item> getFavoriteItems(String userId) {
 		// TODO Auto-generated method stub
-		// return null;
+//		return null;
+	    
 		Set<String> itemIds = getFavoriteItemIds(userId);
 		Set<Item> favoriteItems = new HashSet<>();
 		try {
@@ -231,5 +230,52 @@ public class MySQLConnection implements DBConnection {
 		}
 		return favoriteItems;
 	}
+
+    @Override
+    public String getFullname(String userId) {
+        // TODO Auto-generated method stub
+//        return null;
+        
+        String name = "";
+        try {
+            if (conn == null) {
+                return "";
+            }
+            String sql = "SELECT first_name, last_name from users WHERE user_id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, userId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                name += String.join(" ", rs.getString("first_name"), rs.getString("last_name"));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return name;
+    }
+
+    @Override
+    public boolean verifyLogin(String userId, String password) {
+        // TODO Auto-generated method stub
+//        return false;
+        
+        try {
+            if (conn == null) {
+                return false;
+            }
+
+            String sql = "SELECT user_id from users WHERE user_id = ? and password = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, userId);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 
 }

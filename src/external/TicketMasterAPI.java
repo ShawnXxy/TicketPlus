@@ -27,8 +27,7 @@ public class TicketMasterAPI implements ExternalAPI {
 	 * Creates and sends a request to the TickeMaster API by term and location
 	 */
 	@Override
-	// public JSONArray search (double latitude, double longitude, String term)
-	// {
+	// public JSONArray search (double latitude, double longitude, String term) {
 	public List<Item> search(double latitude, double longitude, String term) {
 		String url = "http://" + API_HOST + SEARCH_PATH;
 		String latlon = latitude + "," + longitude;
@@ -38,60 +37,28 @@ public class TicketMasterAPI implements ExternalAPI {
 		term = urlEncodeHelper(term);
 		String query = String.format("apikey=%s&latlon=%s&keyword=%s", API_KEY, latlon, term);
 		try {
-			// Create a URL connection instance that represents a connection to
-			// the remote object referred to by the URL. The HttpUrlConnection
-			// class allows us to perform basic HTTP requests without the use of
-			// any additional libraries. Note that this method only creates a
-			// connection object, but does not establish the connection yet
+			// Create a URL connection instance that represents a connection to the remote object referred to by the URL. The HttpUrlConnection class allows  to perform basic HTTP requests without the use of any additional libraries. Note that this method only creates a connection object, but does not establish the connection yet
 			HttpURLConnection connection = (HttpURLConnection) new URL(url + "?" + query).openConnection();
-			// Tell what HTTP method to use. GET by default. The
-			// HttpUrlConnection class is used for all types of requests: GET,
-			// POST, HEAD, OPTIONS, PUT, DELETE, TRACE
 			connection.setRequestMethod("GET");
 
-			// Get the status code from an HTTP reponse message. To execute the
-			// request we can sue the getRespnseCode(), connect(),
-			// getInputStream(), or getOutputStream() method
-			int responseCode = connection.getResponseCode(); // Return an
-																// inputstream
-																// that reads
-																// response data
-																// from this
-																// open
-																// connection.
-																// Then we need
-																// to parse the
-																// inputstream
+			// Get the status code from an HTTP response message. To execute the request we can use the getRespnseCode(), connect(), getInputStream(), or getOutputStream() method
+			int responseCode = connection.getResponseCode(); // Return an inputstream that reads response data from this open connection. Then need to parse the inputstream
 			System.out.println("\nSending 'GET' request to URL: " + url + "?" + query);
 			System.out.println("Response Code: " + responseCode);
 
-			// Create a BufferedReader to help read text from a character-input
-			// stream. Provide for the efficient reading of characters, arrays,
-			// and lines.
+			// Create a BufferedReader to help read text from a character-input stream. Provide for the efficient reading of characters, arrays, and lines.
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			// Append response data to response StringBuffer instance line by
-			// line
+			// Append response data to response StringBuffer instance line by line
 			String inputLine;
 			StringBuffer response = new StringBuffer();
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
 			}
-			// Close the BufferedReader after reading the inputstream.response
-			// data
+			// Close the BufferedReader after reading the inputstream.response data
 			in.close();
 
 			// Extract events array only
-			JSONObject responseJson = new JSONObject(response.toString()); // Create
-																			// a
-																			// Json
-																			// object
-																			// out
-																			// of
-																			// the
-																			// response
-																			// string
-			// Obtain part of the Json object - a Json array that represents
-			// events
+			JSONObject responseJson = new JSONObject(response.toString()); // Create a Json object out of the response string Obtain part of the Json object - a Json array that represents events
 			JSONObject embedded = (JSONObject) responseJson.get("_embedded");
 			JSONArray events = (JSONArray) embedded.get("events");
 			// return events;
