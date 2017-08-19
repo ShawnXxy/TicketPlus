@@ -40,7 +40,7 @@ ul {
     color: #333c4d;
     height: 40px;
     margin-right: 20px;
-    padding-left: 0px;
+    padding-left: 9px;
     padding-top: 5px;
     width: 40px;
 }
@@ -75,7 +75,7 @@ ul {
 .container {
     margin: 60px auto;
     max-width: 1000px;
-    max-height: 600px;
+    min-height: 600px;
 }
 
 /*main header*/
@@ -152,7 +152,7 @@ ul {
 }
 
 .nav-icon {
-    color: #2b819a;
+    color: #FFFFFF;
     padding:  20px;
     text-align: center;
 }
@@ -221,7 +221,7 @@ ul {
 .item img {
     border: 1px solid #ffffff;
     height: 80px;
-    margin-right: 80px;
+    width: 80px;
 }
 
 .item > div:first-of-type {
