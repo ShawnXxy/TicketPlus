@@ -75,7 +75,7 @@
         initGeoLocation(); // defined at GEOLOCATION
     } // End of onSessionValid()
 
-    function onSessionInvalid(result) {
+    function onSessionInvalid() {
         var loginForm = $('login-form');
         var itemNav = $('item-nav');
         var itemList = $('item-list');
@@ -188,7 +188,7 @@
     function activeBtn(btnId) {
         var btns = document.getElementsByClassName('main-nav-btn');
 
-        // deactive all navigation buttons
+        // de-active all navigation buttons
         for (var i = 0; i < btns.length; i++) {
             btns[i].className = btns[i].className.replace(/\bactive\b/, '');
         }
@@ -270,7 +270,7 @@
                     callback(xhr.responseText);
                     break;
                 case 403:
-                    onSessionValid();
+                    onSessionInvalid();
                     break;
                 case 401:
                     errorHandler();
@@ -296,7 +296,7 @@
 	* ITEMS/EVENTS
 	**************/
     function loadNearbyItems() {
-        // console.log('loadNearbyItems');
+        console.log('loadNearbyItems');
         activeBtn('nearby-btn');
 
         // The request parameters
@@ -387,7 +387,7 @@
         // check whether this item has been visited or not
         var li = $('item-' + item_id);
         var favIcon = $('fav-icon-' + item_id);
-        var favorite = li.dataset.favorite !== 'true';
+        var isfavorite = li.dataset.favorite !== 'true';
 
         // The request parameters
         var url = './history';
@@ -401,20 +401,22 @@
         // } else {
         //     method = 'DELETE';
         // }
-        var method = favorite ? 'POST' : 'DELETE';
+//        var method = favorite ? 'POST' : 'DELETE';
+        var method = isfavorite ? 'POST' : 'DELETE';
 
         ajax(method, url, req,
             // callback
             function(res) {
                 var result = JSON.parse(res);
                 if (result.status === 'OK') {
-                    li.dataset.favorite = favorite;
+                    li.dataset.favorite = isfavorite;
+//                    li.dataset.favorite = favorite;
                     // if (favorite) {
                     //     favIcon.className = 'fa fa-heart';
                     // } else {
                     //     favIcon.className = 'fa fa-heart-o';
                     // }
-                    favIcon.className = favorite ? 'fa fa-heart' : 'fa fa-heart-o';
+                    favIcon.className = isfavorite ? 'fa fa-heart' : 'fa fa-heart-o';
                 }
             } //
         ); //
@@ -441,25 +443,25 @@
 
         // set the data attributes
         li.dataset.item_id = item_id;
-        li.dataset.favorite = item.favorite;
+        li.dataset.favorite = item.isfavorite;
 
         // add item image
-        li.appendChild($('img', {
-            src : item.image_url
-        }));
-        // if (item.image_url) {
-        //     li.appendChild(
-        //         $('img', {
-        //             src : item.image_url
-        //         })
-        //     );
-        // } else {
-        //     li.appendChild(
-        //         $('img', {
-        //             src : 'https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png'
-        //         })
-        //     );
-        // }
+//        li.appendChild($('img', {
+//            src : item.image_url
+//        }));
+         if (item.image_url) {
+             li.appendChild(
+                 $('img', {
+                     src : item.image_url
+                 })
+             );
+         } else {
+             li.appendChild(
+                 $('img', {
+                     src : 'https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png'
+                 })
+             );
+         }
 
         // section
         var section = $('div', {});
@@ -480,11 +482,12 @@
         category.innerHTML = 'Category: ' + item.categories.join(', ');
         section.appendChild(category);
 
-        // stars: used for rating
+        // stars: used for rating 
+        // here we might have a problem showing 3.5 as 3.
         var stars = $('div', {
             className : 'stars'
         });
-        for (var i = 1; i < item.rating; i++) {
+        for (var i = 1; i < item.rating; i++) { // start from 1 as not possible for 0 ratings
             var star = $('i', {
                 className : 'fa fa-star'
             });
@@ -502,7 +505,7 @@
         var address = $('p', {
             className : 'item-address'
         });
-        address.innerHTML = item.address.replace(/,/g, '<br/>').replace(/\"/g, '');
+        address.innerHTML = item.address.replace(/,/g, '<br/>'); //.replace(/\"/g, '');
         li.appendChild(address);
 
         // favorite link
@@ -514,7 +517,7 @@
         };
         favLink.appendChild($('i', {
             id : 'fav-icon-' + item_id,
-            className : item.favorite ? 'fa fa-heart' : 'fa fa-heart-o'
+            className : item.isfavorite ? 'fa fa-heart' : 'fa fa-heart-o'
         }));
         li.appendChild(favLink);
         itemList.appendChild(li);
