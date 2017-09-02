@@ -387,7 +387,7 @@
         // check whether this item has been visited or not
         var li = $('item-' + item_id);
         var favIcon = $('fav-icon-' + item_id);
-        var isfavorite = li.dataset.favorite !== 'true';
+        var favorite = li.dataset.favorite !== 'true';
 
         // The request parameters
         var url = './history';
@@ -401,22 +401,20 @@
         // } else {
         //     method = 'DELETE';
         // }
-//        var method = favorite ? 'POST' : 'DELETE';
-        var method = isfavorite ? 'POST' : 'DELETE';
+        var method = favorite ? 'POST' : 'DELETE';
 
         ajax(method, url, req,
             // callback
             function(res) {
                 var result = JSON.parse(res);
                 if (result.status === 'OK') {
-                    li.dataset.favorite = isfavorite;
-//                    li.dataset.favorite = favorite;
+                    li.dataset.favorite = favorite;
                     // if (favorite) {
                     //     favIcon.className = 'fa fa-heart';
                     // } else {
                     //     favIcon.className = 'fa fa-heart-o';
                     // }
-                    favIcon.className = isfavorite ? 'fa fa-heart' : 'fa fa-heart-o';
+                    favIcon.className = favorite ? 'fa fa-heart' : 'fa fa-heart-o';
                 }
             } //
         ); //
@@ -443,7 +441,7 @@
 
         // set the data attributes
         li.dataset.item_id = item_id;
-        li.dataset.favorite = item.isfavorite;
+        li.dataset.favorite = item.favorite;
 
         // add item image
 //        li.appendChild($('img', {
@@ -517,7 +515,7 @@
         };
         favLink.appendChild($('i', {
             id : 'fav-icon-' + item_id,
-            className : item.isfavorite ? 'fa fa-heart' : 'fa fa-heart-o'
+            className : item.favorite ? 'fa fa-heart' : 'fa fa-heart-o'
         }));
         li.appendChild(favLink);
         itemList.appendChild(li);

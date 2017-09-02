@@ -1,12 +1,11 @@
 package db.mysql;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import db.MySQLDBUtil;
-
-import java.sql.Connection;
 
 public class MySQLTableCreation {
 	// Run this as Java application to reset db schema.
@@ -49,7 +48,6 @@ public class MySQLTableCreation {
 			sql = "CREATE TABLE items " + "(item_id VARCHAR(255) NOT NULL, " + "name VARCHAR(255), "	+ "city VARCHAR(255), " + "state VARCHAR(255), " + "country VARCHAR(255), "	+ "zipcode VARCHAR(255), " + "rating FLOAT," + "address VARCHAR(255), " + "latitude FLOAT, "	+ "longitude FLOAT, " + "description VARCHAR(255), " + "snippet VARCHAR(255), " + "snippet_url VARCHAR(255), " + "image_url VARCHAR(255)," + "url VARCHAR(255),"	+ " PRIMARY KEY ( item_id ))";
 			stmt.executeUpdate(sql);
 
-			// Student question: why use a combine key here?
 			sql = "CREATE TABLE categories " + "(item_id VARCHAR(255) NOT NULL, " + " category VARCHAR(255), "	+ "PRIMARY KEY ( item_id, category), " + "FOREIGN KEY (item_id) REFERENCES items(item_id))";
 			stmt.executeUpdate(sql);
 
