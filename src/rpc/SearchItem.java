@@ -3,6 +3,7 @@ package rpc;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,18 +51,20 @@ public class SearchItem extends HttpServlet {
 
 //		String userId = request.getParameter("user_id");
 		String userId = session.getAttribute("user").toString();
-		double latitude = Double.parseDouble(request.getParameter("lat"));
-		double longitude = Double.parseDouble(request.getParameter("lon"));
+		double lat = Double.parseDouble(request.getParameter("lat"));
+		double lon = Double.parseDouble(request.getParameter("lon"));
 		//Term can be empty or null
 		String term = request.getParameter("term");
 //      ExternalAPI externalAPI =ExternalAPIFactory.getExternalAPI();
-		List<Item> items = conn.searchItems(userId, latitude, longitude, term);
+		List<Item> items = conn.searchItems(userId, lat, lon, term);
 //		List<Item> items = externalAPI.search(latitude, longitude, term);
 		List<JSONObject> list = new ArrayList<>();
+		Set<String> favorite = conn.getFavoriteItemIds(userId);
 		try {
 			for (Item item : items) {
 				// Add a thin version of item object
 				JSONObject obj = item.toJSONObject();
+				obj.put("favorite", favorite.contains(item.getItemId()));
 				list.add(obj);
 			}
 		} catch (Exception e) {

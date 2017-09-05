@@ -44,8 +44,8 @@ public class RecommendItem extends HttpServlet {
 		List<Item> items = recommendation.recommendItems(userId, lat, lon);
 		
 		// Convert the list of items into json array
-		JSONArray array = RpcHelper.getJSONArray(items);
-		RpcHelper.writeJsonArray(response, array);
+//		JSONArray array = RpcHelper.getJSONArray(items);
+		RpcHelper.writeJsonArray(response, new JSONArray(items));
 	}
 
 	/**
