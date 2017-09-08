@@ -407,7 +407,7 @@
             // callback
             function(res) {
                 var result = JSON.parse(res);
-                if (result.status === 'OK') {
+                if (result.status === 'SUCCESS') {
                     li.dataset.favorite = favorite;
                     // if (favorite) {
                     //     favIcon.className = 'fa fa-heart';
@@ -479,13 +479,20 @@
         });
         category.innerHTML = 'Category: ' + item.categories.join(', ');
         section.appendChild(category);
+        
+        // date
+        var date = $('p', {
+            className : 'item-date'
+        });
+        date.innerHTML = 'Date: ' + item.date;
+        section.appendChild(date);
 
         // stars: used for rating 
         // here we might have a problem showing 3.5 as 3.
         var stars = $('div', {
             className : 'stars'
         });
-        for (var i = 1; i < item.rating; i++) { // start from 1 as not possible for 0 ratings
+        for (var i = 0; i < item.rating; i++) { 
             var star = $('i', {
                 className : 'fa fa-star'
             });
@@ -503,7 +510,7 @@
         var address = $('p', {
             className : 'item-address'
         });
-        address.innerHTML = item.address.replace(/,/g, '<br/>'); //.replace(/\"/g, '');
+        address.innerHTML = item.address.replace(/,/g, '<br/>').replace(/\"/g, '') + ', ' + item.zipcode;
         li.appendChild(address);
 
         // favorite link
