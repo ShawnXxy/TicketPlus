@@ -23,7 +23,7 @@ public class Item {
     private String url;
     private String snippet;
     private String snippetUrl;
-    
+
     public String getItemId() {
         return itemId;
     }
@@ -72,8 +72,7 @@ public class Item {
     public String getSnippetUrl() {
         return snippetUrl;
     }
-
-	// convert an item object to a JSON object instance
+    
     public JSONObject toJSONObject() {
         JSONObject obj = new JSONObject();
         try {
@@ -98,14 +97,10 @@ public class Item {
         }
         return obj;
     }
-
-	/**
-	 * Builder pattern builds a complex object using simple objects and using a
-	 * step by step approach. It separates the construction of a complex object
-	 * from its representation so that the same construction process can create
-	 * different representations
-	 * 
-	 */
+    
+    /**
+     * This is a builder pattern in Java.
+     */
     private Item(ItemBuilder builder) {
         this.itemId = builder.itemId;
         this.name = builder.name;
@@ -125,25 +120,25 @@ public class Item {
         this.snippetUrl = builder.snippetUrl;
     }
 
-	public static class ItemBuilder {
-		private String itemId;
-		private String name;
-		private double rating;
-		private String address;
-		private String city;
-		private String country;
-		private String state;
-		private String zipcode;
-		private double latitude;
-		private double longitude;
-		private String description;
-		private Set<String> categories;
-		private String imageUrl;
-		private String url;
-		private String snippet;
-		private String snippetUrl;
-		
-		public ItemBuilder setItemId(String itemId) {
+    public static class ItemBuilder {
+        private String itemId;
+        private String name;
+        private double rating;
+        private String address;
+        private String city;
+        private String country;
+        private String state;
+        private String zipcode;
+        private double latitude;
+        private double longitude;
+        private String description;
+        private Set<String> categories;
+        private String imageUrl;
+        private String url;
+        private String snippet;
+        private String snippetUrl;
+
+        public ItemBuilder setItemId(String itemId) {
             this.itemId = itemId;
             return this;
         }
@@ -226,10 +221,5 @@ public class Item {
         public Item build() {
             return new Item(this);
         }
-
-	} // End of ItemBuilder
-
-} // END
-	    
-
-
+    }
+}

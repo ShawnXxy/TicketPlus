@@ -26,6 +26,8 @@
         //     user_id: '1111',
         //     name: 'Xiangyu Xiao'
         // }); // onSessionValid() defined at SESSION
+
+        initGeoLocation();
     } // End of init()
 
     /*******************
@@ -510,7 +512,7 @@
         var address = $('p', {
             className : 'item-address'
         });
-        address.innerHTML = item.address.replace(/,/g, '<br/>').replace(/\"/g, '') + ', ' + item.zipcode;
+        address.innerHTML = item.address.replace(/,/g, '<br/>').replace(/\"/g, '') + item.city + ', ' + item.state + ' ' + item.zipcode;
         li.appendChild(address);
 
         // favorite link

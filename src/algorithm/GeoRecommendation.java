@@ -13,62 +13,61 @@ import entity.Item;
 
 public class GeoRecommendation implements Recommendation {
 
-	@Override
-	public List<Item> recommendItems(String userId, double lat, double lon) {
-		// TODO Auto-generated method stub
-//		return null;
-		
-		DBConnection conn = DBConnectionFactory.getDBConnection();
-		// Step 1: fetch all the events(ids	) this user has visited/added to favorite
-		Set<String> favoriteItems = conn.getFavoriteItemIds(userId);
-		// Step 2: given all these visited events, fetch all categories
-		Set<String> allCategories = new HashSet<>();
-		for (String item : favoriteItems) {
-			allCategories.addAll(conn.getCategories(item));
-		}
-		// Step 3: given these fetched categories, find the events with above categories in category table
-		Set<Item> recommendedItems = new HashSet<>();
-		for (String category : allCategories) {
-			List<Item> items = conn.searchItems(userId, lat, lon, category);
-			recommendedItems.addAll(items);
-		}
-		allCategories.remove("Undefined"); // tune category set
-		if (allCategories.isEmpty()) {
-		    allCategories.add("");
-		}
-		// Step 4: Filter items that user visited
-		List<Item> filteredItems = new ArrayList<>();
-		for (Item item : recommendedItems) {
-			if (!favoriteItems.contains(item.getItemId())) {
-				filteredItems.add(item);
-			}
-		}
-		// Step 5: perfom ranking of these items based on distance
-		Collections.sort(filteredItems, new Comparator<Item>() {
-			@Override
-			public int compare (Item item1, Item item2) {
-				double distance1 = getDistance(item1.getLatitude(), item1.getLongitude(), lat, lon);
-				double distance2 = getDistance(item2.getLatitude(), item2.getLongitude(), lat, lon);
-				// return the increasing order of distance
-				return (int) (distance1 - distance2);
-			}
-		});
-			
-		return filteredItems;
-	}
-		
-		// Calculate the distances between two geolocations
-		// http://andrew.hedges.name/experiments/haversine/
-		private static double getDistance (double lat1, double lon1, double lat2, double lon2) {
-		    double dlon = lon2 - lon1;
-		    double dlat = lat2 - lat1;
-		    double a = Math.sin(dlat / 2 / 180 * Math.PI) * Math.sin(dlat / 2 / 180 * Math.PI) + Math.cos(lat1 / 180 * Math.PI) * Math.cos(lat2 / 180 * Math.PI) * Math.sin(dlon / 2 / 180 * Math.PI) * Math.sin(dlon / 2 / 180 * Math.PI);
-		    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-		    // Radius of earth in miles.
-		    double R = 3961;
-		    return R * c;
+    @Override
+    public List<Item> recommendItems(String userId, double lat, double lon) {
+        // TODO Auto-generated method stub
+//      return null;
+        
+        DBConnection conn = DBConnectionFactory.getDBConnection();
+        // Step 1: fetch all the events(ids ) this user has visited/added to favorite
+        Set<String> favoriteItems = conn.getFavoriteItemIds(userId);
+        // Step 2: given all these visited events, fetch all categories
+        Set<String> allCategories = new HashSet<>();
+        for (String item : favoriteItems) {
+            allCategories.addAll(conn.getCategories(item));
+        }
+        // Step 3: given these fetched categories, find the events with above categories in category table
+        Set<Item> recommendedItems = new HashSet<>();
+        for (String category : allCategories) {
+            List<Item> items = conn.searchItems(userId, lat, lon, category);
+            recommendedItems.addAll(items);
+        }
+        allCategories.remove("Undefined"); // tune category set
+        if (allCategories.isEmpty()) {
+            allCategories.add("");
+        }
+        // Step 4: Filter items that user visited
+        List<Item> filteredItems = new ArrayList<>();
+        for (Item item : recommendedItems) {
+            if (!favoriteItems.contains(item.getItemId())) {
+                filteredItems.add(item);
+            }
+        }
+        // Step 5: perfom ranking of these items based on distance
+        Collections.sort(filteredItems, new Comparator<Item>() {
+            @Override
+            public int compare (Item item1, Item item2) {
+                double distance1 = getDistance(item1.getLatitude(), item1.getLongitude(), lat, lon);
+                double distance2 = getDistance(item2.getLatitude(), item2.getLongitude(), lat, lon);
+                // return the increasing order of distance
+                return (int) (distance1 - distance2);
+            }
+        });
+            
+        return filteredItems;
+    }
+        
+        // Calculate the distances between two geolocations
+        // http://andrew.hedges.name/experiments/haversine/
+        private static double getDistance (double lat1, double lon1, double lat2, double lon2) {
+            double dlon = lon2 - lon1;
+            double dlat = lat2 - lat1;
+            double a = Math.sin(dlat / 2 / 180 * Math.PI) * Math.sin(dlat / 2 / 180 * Math.PI) + Math.cos(lat1 / 180 * Math.PI) * Math.cos(lat2 / 180 * Math.PI) * Math.sin(dlon / 2 / 180 * Math.PI) * Math.sin(dlon / 2 / 180 * Math.PI);
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            // Radius of earth in miles.
+            double R = 3961;
+            return R * c;
 
-		}
+        }
 }
-
 

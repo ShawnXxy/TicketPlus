@@ -57,8 +57,7 @@ public interface DBConnection {
      * @param userId
      * @param lat
      * @param lon
-     * @param term
-     *            (Nullable)
+     * @param term 
      * @return list of items
      */
     public List<Item> searchItems(String userId, double lat, double lon, String term);
@@ -71,8 +70,7 @@ public interface DBConnection {
     public void saveItem(Item item);
 
     /**
-     * Get full name of a user. (This is not needed for main course, just for
-     * demo and extension).
+     * Get full name of a user. 
      * 
      * @param userId
      * @return full name of the user
@@ -80,8 +78,7 @@ public interface DBConnection {
     public String getFullname(String userId);
 
     /**
-     * Return whether the credential is correct. (This is not needed for main
-     * course, just for demo and extension)
+     * Return whether the credential is correct. 
      * 
      * @param userId
      * @param password
