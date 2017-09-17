@@ -20,7 +20,7 @@ ul {
 /*top header*/
 .top-header {
     align-items: center;
-    background: #3c93ad;
+    background: #2098D1;
     box-shadow: 0px 2px 10px #333333;
     display: flex;
     height: 60px;
@@ -130,12 +130,13 @@ ul {
     float: right;
     padding: 8px 20px;
     text-align: right;
-    border: none;
+    border: 1px solid #f2ebd9;
 }
 
-#login-form button:hover {
+/* #login-form button:hover {
     background-color: #2b92b2;
-}
+    border: 1px solid #2b92b2;
+} */
 
 #login-error {
     clear: both;
@@ -145,7 +146,7 @@ ul {
 
 /*main secion*/
 .main-section {
-    background: #3c93ad;
+    background: #2098D1;
 }
 
 /*aside*/
@@ -174,12 +175,12 @@ ul {
 
 .main-nav-btn:hover {
     background: rgba(255, 255, 255, 0.8);
-    color: #2b819a;
+    color: #2098D1;
 }
 
 .main-nav-btn.active {
     background: #f2ebd9;
-    color: #2b819a;
+    color: #2098D1;
 }
 
 .main-nav-btn i {
@@ -189,7 +190,7 @@ ul {
 /*item list*/
 #item-list {
     background: #f2ebd9;
-    color: #3c93ad;
+    color: #2098D1;
     display: block;
     list-style: none;
     margin-left: 180px;
@@ -235,7 +236,7 @@ ul {
 }
 
 .item-name {
-    color: #3c93ad;
+    color: #2098D1;
     font-weight: 400;
     text-decoration: none;
 }
@@ -267,6 +268,28 @@ ul {
 .fav-link:hover {
     color: #f13f3f;
 }
+
+/**
+*   Comments section
+*/
+.post {
+    /* margin-top: 30px; */
+    border-top: 1px solid #ffffff;
+    background: #f2ebd9;
+}
+
+.post h1 {
+    color: #2098D1;
+}
+
+/* fb-comments {
+	width: 100% auto;
+}
+
+.item-nav > fb-comments {
+	font-size: 0.3em;
+	width: 50%;
+} */
 
 /*footer*/
 footer {

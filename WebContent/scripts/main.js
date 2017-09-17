@@ -62,6 +62,7 @@
         var avatar = $('avatar');
         var welcomeMsg = $('welcome-msg');
         var logoutBtn = $('logout-link');
+        var post = $('post');
 
         welcomeMsg.innerHTML = 'Welcome, ' + user_fullname;
 
@@ -71,6 +72,7 @@
         showElement(avatar);
         showElement(welcomeMsg);
         showElement(logoutBtn, 'inline-block');
+        showElement(post);
         // hideElement()
         hideElement(loginForm);
 
@@ -84,6 +86,7 @@
         var avatar = $('avatar');
         var welcomeMsg = $('welcome-msg');
         var logoutBtn = $('logout-link');
+        var post = $('post');
 
         // Hide views if failed login
         hideElement(itemNav);
@@ -91,6 +94,7 @@
         hideElement(avatar);
         hideElement(welcomeMsg);
         hideElement(logoutBtn);
+        hideElement(post);
         // hideElement()
         showElement(loginForm);
 

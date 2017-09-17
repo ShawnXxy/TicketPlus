@@ -13,6 +13,8 @@
         <!-- custom css -->
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/contact.css">
+        <!-- hover.css -->
+        <link href="styles/hover.css" rel="stylesheet" media="all">
         <!-- favicon -->
         <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -22,12 +24,19 @@
         <meta name="theme-color" content="#ffffff">
     </head>
     <body>
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+
         <header class="top-header">
             <nav class="top-nav">
-                <!-- <div class="container"> -->
-                    <a href="index.html">Home</a>
-                    <a href="contact.html">Contact</a>
-                <!-- </div> -->
+                <a href="index.html">Home</a>
+                <a href="contact.html">Contact</a>
             </nav>
             <span id="welcome-msg"></span>
             <a id="logout-link" href="LogoutServlet">Logout</a>
@@ -50,7 +59,7 @@
                     <label for="password">Password:</label>
                     <input type="text" name="password" id="password">
 
-                    <button id="login-btn">Login</button>
+                    <button id="login-btn" class="hvr-radial-out">Login</button>
                     <p id="login-error"></p>
                 </div>
 
@@ -70,15 +79,34 @@
                         <a href="#" id="recommend-btn" class="main-nav-btn">
                             <i class="fa fa-thumbs-up"></i> Recommendation
                         </a>
+
+                        <!-- <a href="#" id="sponsor-btn" class="main-nav-btn">
+                            <i class="fa fa-youtube"></i> Sponsor Fav!
+                            <div class="embed-container">
+                                <iframe id="sponsor-btn" src="https://www.youtube.com/embed/Y_kJfCGIrlo?
+                                feature=oembed&amp;wmode=transparent&amp;origin=https://
+                                www.tonyrobbins.com&amp;enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div class="fb-like" data-href="https://www.youtube.com/watch?
+                                   time_continue=2&amp;v=Y_kJfCGIrlo" data-layout="button" data-action="like" 
+                                   data-size="small" data-show-faces="true" data-share="true">
+                            </div>
+                        </a> -->
                     </nav>
                 </aside>
 
                 <ul id="item-list">
-                    <!-- <li class="item">
+                    <li class="item">
                         <img src="https://s3-media3.fl.yelpcdn.com/bphoto/EmBj4qlyQaGd9Q4oXEhEeQ/ms.jpg" alt="item image">
                         <div>
                             <a href="#" class="item-name">Item</a>
                             <p class="item-category">Vegetarian</p>
+                            <p class="item-startDateTime">localDate <!-- localTime --></p>
+                            <p class="item-spanMultipleDays">spanMultipleDays</p>
+                            <p class="item-upcomingEvents">upcomingEvents</p>
+                            <p class="item-status">status</p>
+                            <p class="item-description">description</p>
+                            <p class="item-generalInfo">generalInfo</p>
                             <div class="stars">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -89,9 +117,16 @@
                         <div class="fav-link">
                             <i class="fa fa-heart"></i>
                         </div>
-                    </li> -->
+                    </li>
                 </ul>
             </section>
+
+            <div class="post" id="post">
+                <h1>Comments</h1>
+                    <div class="comments">
+                        <div class="fb-comments" data-href="http://34.214.8.249:8080/Titan/" data-width="100%" data-numposts="5"></div> 			  	 
+                    </div>        
+              </div>
         </div>
 
         <footer>
