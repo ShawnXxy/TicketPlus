@@ -25,17 +25,17 @@ public class GeoRecommendation implements Recommendation {
         Set<String> allCategories = new HashSet<>();
         for (String item : favoriteItems) {
             allCategories.addAll(conn.getCategories(item));
-        }
+        }        
         // Step 3: given these fetched categories, find the events with above categories in category table
         Set<Item> recommendedItems = new HashSet<>();
         for (String category : allCategories) {
             List<Item> items = conn.searchItems(userId, lat, lon, category);
             recommendedItems.addAll(items);
         }
-        allCategories.remove("Undefined"); // tune category set
-        if (allCategories.isEmpty()) {
-            allCategories.add("");
-        }
+//        allCategories.remove("Undefined"); // tune category set
+//        if (allCategories.isEmpty()) {
+//            allCategories.add("");
+//        }
         // Step 4: Filter items that user visited
         List<Item> filteredItems = new ArrayList<>();
         for (Item item : recommendedItems) {
@@ -43,7 +43,7 @@ public class GeoRecommendation implements Recommendation {
                 filteredItems.add(item);
             }
         }
-        // Step 5: perfom ranking of these items based on distance
+        // Step 5: perform ranking of these items based on distance
         Collections.sort(filteredItems, new Comparator<Item>() {
             @Override
             public int compare (Item item1, Item item2) {

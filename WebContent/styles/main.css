@@ -20,7 +20,7 @@ ul {
 /*top header*/
 .top-header {
     align-items: center;
-    background: #2b819a;
+    background: #3c93ad;
     box-shadow: 0px 2px 10px #333333;
     display: flex;
     height: 60px;
@@ -97,16 +97,20 @@ ul {
 }
 
 .container > header span {
-    color: #2b92b2;
+    color: #3c93ad;
 }
 
-/*login form*/
-#login-form {
+/*login form & contact form*/
+#login-form, #contact-form {
     color: #ffffff;
     margin: 0px auto;
     overflow: auto;
     padding: 40px;
     width: 300px;
+}
+
+#contact-form {
+    width: 700px;
 }
 
 #login-form label {
@@ -121,7 +125,7 @@ ul {
      width: 100%;
 }
 
-#login-form button {
+#login-form button, #contact-form button {
     cursor: pointer;
     float: right;
     padding: 8px 20px;
@@ -141,7 +145,7 @@ ul {
 
 /*main secion*/
 .main-section {
-    background: #2b7285;
+    background: #3c93ad;
 }
 
 /*aside*/
@@ -185,7 +189,7 @@ ul {
 /*item list*/
 #item-list {
     background: #f2ebd9;
-    color: #2b819a;
+    color: #3c93ad;
     display: block;
     list-style: none;
     margin-left: 180px;
@@ -231,7 +235,7 @@ ul {
 }
 
 .item-name {
-    color: #2b819a;
+    color: #3c93ad;
     font-weight: 400;
     text-decoration: none;
 }

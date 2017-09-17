@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ticket Search and Event Recommendation">
+  <meta name="author" content="Xiangyu Xiao">
+  <title>Ticket+</title>
+  <!--Google font-->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Bootstrap -->
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+  <!-- custom css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/contact.css">
+</head>
+<body>
+  <header class="top-header">
+    <nav class="top-nav navbar navbar-default navbar-fixed-top">
+    	
+    		<a href="index.html">Home</a>
+			<a href="contact.html">Contact</a>
+		    <!--<a href="#">About</a>-->
+
+      
+    </nav>
+    <span id="welcome-msg"></span>
+    <a id="logout-link" href="LogoutServlet">Logout</a>
+    <i id="avatar" class="avatar fa fa-user fa-2x"></i>
+  </header>
+
+  <div class="container">
+    <header>
+      <p>
+        <span>Events</span>
+        <br/> Recommendation
+      </p>
+    </header>
+
+    <section class="main-section">
+      <div id="contact-form">
+      	<form method="POST" action="index.html" id="formcontactus" class="" >
+	    	<div class="form-group">
+	    		<!--  <label for="username">Your name: </label>-->
+	    		<input name="name" type="text" class="form-control requiretop" placeholder="* Your Name " />
+	    	</div>
+	    	<div class="form-group">
+	    		<!--  <label for="email">Your Email: </label>-->
+	    		<input name="email" type="email" class="form-control requiretop" placeholder="* Your Email " />
+	    	</div>
+	    	<div class="form-group">
+	    		<!--  <label for="username">Message: </label>-->
+	    		<textarea rows="6" name="message" class="form-control requiretop" placeholder="* Your Message "></textarea>
+	    	</div>
+	    	<div class="form-group">
+	    		<button type="submit" class="btn btn-dark selected">Send Message</button>
+	    	</div>
+	    </form>
+								
+	  </div>
+    </section>
+  </div>
+
+  <footer>
+    <p class="title">What We Do</p>
+    <p>"Help you find the best events around."</p>
+    <ul>
+      <li>
+        <p><i class="fa fa-user fa-2x"></i></p>
+        <p>
+        	&copy; <a class="web" href="http://www.shawnxxy.site" target="_blank">Xiangyu Xiao</a> 2017<br/>
+		</p>
+      </li>
+      <li>
+        <p><i class="fa fa-github fa-2x"></i></p>
+        <p>
+        	<a class="web" href="https://github.com/ShawnXxy/Ticket-" target="_blank">GitHub</a>
+		</p>
+      </li>
+      <li>
+        <p><i class="fa fa-envelope-o fa-2x"></i></p>
+        <p><a href="mailto:shawnxxy@hotmail.com" class='web mailto'>shawnxxy@hotmail.com</a></p>
+      </li>
+    </ul>
+  </footer>
+
+  <script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
+  <!-- jQuery -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+  <script  src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>
+  <!-- contact_me js -->
+  <script src="scripts/contact_me.js"></script>
+  <!-- Bootstrap -->
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+  <!-- custom js -->
+  <script src="scripts/main.js"></script>
+  <script src="scripts/custom.js"></script>
+  
+
+</body>
+</html>
