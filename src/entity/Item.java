@@ -9,6 +9,10 @@ import org.json.JSONObject;
 public class Item {
     private String itemId;
     private String name;
+//    private String date;
+//    private String time;
+//    private String remainingTickets;
+//    private String saleStatus;
     private double rating;
     private String address;
     private String city;
@@ -72,12 +76,28 @@ public class Item {
     public String getSnippetUrl() {
         return snippetUrl;
     }
+//    public String getDate() {
+//        return date;
+//    }
+//    public String getTime() {
+//        return time;
+//    }
+//    public String getRemainingTickets() {
+//        return remainingTickets;
+//    }
+//    public String getSaleStatus() {
+//        return saleStatus;
+//    }
     
     public JSONObject toJSONObject() {
         JSONObject obj = new JSONObject();
         try {
             obj.put("item_id", itemId);
-            obj.put("name", name);
+            obj.put("name", name);          
+//            obj.put("date", date);
+//            obj.put("time", time);
+//            obj.put("remaining_tickets", remainingTickets);
+//            obj.put("sale_status", saleStatus);
             obj.put("rating", rating);
             obj.put("address", address);
             obj.put("city", city);
@@ -104,6 +124,10 @@ public class Item {
     private Item(ItemBuilder builder) {
         this.itemId = builder.itemId;
         this.name = builder.name;
+//        this.date = builder.date;
+//        this.time = builder.time;
+//        this.remainingTickets = builder.remainingTickets;
+//        this.saleStatus = builder.saleStatus;
         this.rating = builder.rating;
         this.address = builder.address;
         this.city = builder.city;
@@ -123,6 +147,10 @@ public class Item {
     public static class ItemBuilder {
         private String itemId;
         private String name;
+//        private String date;
+//        private String time;
+//        private String remainingTickets;
+//        private String saleStatus;
         private double rating;
         private String address;
         private String city;
@@ -217,6 +245,26 @@ public class Item {
             this.snippetUrl = snippetUrl;
             return this;
         }
+
+//        public ItemBuilder setDate(String date) {
+//            this.date = date;
+//            return this;
+//        }
+//
+//        public ItemBuilder setTime(String time) {
+//            this.time = time;
+//            return this;
+//        }
+//
+//        public ItemBuilder setRemainingTickets(String string) {
+//            this.remainingTickets = string;
+//            return this;
+//        }
+//
+//        public ItemBuilder setSaleStatus(String saleStatus) {
+//            this.saleStatus = saleStatus;
+//            return this;
+//        }
 
         public Item build() {
             return new Item(this);

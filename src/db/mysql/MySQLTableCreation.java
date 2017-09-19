@@ -44,7 +44,7 @@ public class MySQLTableCreation {
             stmt.executeUpdate(sql);
             
             // Step 2. Create new tables.
-            sql = "CREATE TABLE items " + "(item_id VARCHAR(255) NOT NULL, " + "name VARCHAR(255), "    + "city VARCHAR(255), " + "state VARCHAR(255), " + "country VARCHAR(255), " + "zipcode VARCHAR(255), " + "rating FLOAT," + "address VARCHAR(255), " + "latitude FLOAT, "    + "longitude FLOAT, " + "description VARCHAR(255), " + "snippet VARCHAR(255), " + "snippet_url VARCHAR(255), " + "image_url VARCHAR(255)," + "url VARCHAR(255),"    + " PRIMARY KEY ( item_id ))";
+            sql = "CREATE TABLE items " + "(item_id VARCHAR(255) NOT NULL, " + "name VARCHAR(255), " + "city VARCHAR(255), " + "state VARCHAR(255), " + "country VARCHAR(255), " + "zipcode VARCHAR(255), " + "rating FLOAT," + "address VARCHAR(255), " + "latitude FLOAT, "    + "longitude FLOAT, " + "description VARCHAR(255), " + "snippet VARCHAR(255), " + "snippet_url VARCHAR(255), " + "image_url VARCHAR(255)," + "url VARCHAR(255),"    + " PRIMARY KEY ( item_id ))";
             stmt.executeUpdate(sql);
 
             sql = "CREATE TABLE categories " + "(item_id VARCHAR(255) NOT NULL, " + " category VARCHAR(255), "  + "PRIMARY KEY ( item_id, category), " + "FOREIGN KEY (item_id) REFERENCES items(item_id))";

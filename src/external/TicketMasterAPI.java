@@ -130,6 +130,10 @@ public class TicketMasterAPI implements ExternalAPI {
             builder.setName(getStringFieldOrNull(event, "name"));
             builder.setDescription(getDescription(event));
             builder.setCategories(getCategories(event));
+//            builder.setDate(getStringFieldOrNull(event, "date"));
+//            builder.setTime(getStringFieldOrNull(event, "time"));
+//            builder.setRemainingTickets(getStringFieldOrNull(event, "remaining_tickets"));
+//            builder.setSaleStatus(getStringFieldOrNull(event, "sale_status"));
             builder.setImageUrl(getImageUrl(event));
             builder.setUrl(getStringFieldOrNull(event, "url"));
             JSONObject venue = getVenue(event);
@@ -253,8 +257,8 @@ public class TicketMasterAPI implements ExternalAPI {
         // Mountain View, CA
         tmApi.queryAPI(37.38, -122.08);
         // London, UK
-//        tmApi.queryAPI(51.503364, -0.12);
+        tmApi.queryAPI(51.503364, -0.12);
         // Houston, TX
-//        tmApi.queryAPI(29.682684, -95.295410);
+        tmApi.queryAPI(29.682684, -95.295410);
     }
 }

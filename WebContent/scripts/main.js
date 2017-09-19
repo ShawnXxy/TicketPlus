@@ -15,6 +15,7 @@
     function init() {
         // Register event
         // $()
+        // $('register-btn').addEventListener('click', signup);
         $('login-btn').addEventListener('click', login); // login() defined at LOGIN
         $('nearby-btn').addEventListener('click', loadNearbyItems); // loadNearbyItems() defined at EVENTS/ITEMS SETTING
         $('fav-btn').addEventListener('click', loadFavoriteItems); // loadFavoriteItems() defined at EVENTS/ITEMS SETTING
@@ -27,7 +28,7 @@
         //     name: 'Xiangyu Xiao'
         // }); // onSessionValid() defined at SESSION
 
-        initGeoLocation();
+        // initGeoLocation();
     } // End of init()
 
     /*******************
@@ -224,12 +225,6 @@
     }
 
     function showElement(element, style) {
-        // var displayStyle;
-        // if (style) {
-        //     displayStyle = style;
-        // } else {
-        //     displayStyle = 'block';
-        // }
         var displayStyle = style ? style : 'block';
         element.style.display = displayStyle;
     }
@@ -399,14 +394,8 @@
         var url = './history';
         var req = JSON.stringify({
             user_id : user_id,
-            favorite : [item_id]
+            favorite : [ item_id ]
         });
-        // var method;
-        // if (favorite) {
-        //     method = 'POST';
-        // } else {
-        //     method = 'DELETE';
-        // }
         var method = favorite ? 'POST' : 'DELETE';
 
         ajax(method, url, req,
@@ -415,11 +404,6 @@
                 var result = JSON.parse(res);
                 if (result.status === 'SUCCESS') {
                     li.dataset.favorite = favorite;
-                    // if (favorite) {
-                    //     favIcon.className = 'fa fa-heart';
-                    // } else {
-                    //     favIcon.className = 'fa fa-heart-o';
-                    // }
                     favIcon.className = favorite ? 'fa fa-heart' : 'fa fa-heart-o';
                 }
             } //
@@ -486,12 +470,53 @@
         category.innerHTML = 'Category: ' + item.categories.join(', ');
         section.appendChild(category);
         
-        // date
-        var date = $('p', {
-            className : 'item-date'
-        });
-        date.innerHTML = 'Date: ' + item.date;
-        section.appendChild(date);
+        // // date
+        // var date = $('p', {
+        //     className : 'item-date'
+        // });
+        // date.innerHTML = 'Date: ' + item.date;
+        // section.appendChild(date);
+
+        // var time = $('p', {
+		// 	className : 'item-time'
+		// });
+		// time.innerHTML = 'Time: ' + item.time;
+        // section.appendChild(time);
+        
+        // // spanMultipleDays
+		// var spanMultipleDays = $('p', {
+		// 	className : 'item-spanMultipleDays'
+		// });	
+		// spanMultipleDays.innerHTML = 'Span Multiple Days: ' + item.spanMultipleDays;
+		// section.appendChild(spanMultipleDays);		
+		
+		// // Remaining Tickets:
+		// var remainingTickets = $('p', {
+		// 	className : 'item-remainingTickets'
+		// });	
+		// remainingTickets.innerHTML = 'Remaining Tickets: ' + item.remainingTickets;
+		// section.appendChild(remainingTickets);		
+
+		// // status
+		// var status = $('p', {
+		// 	className : 'item-status'
+		// });	
+		// status.innerHTML = 'Sale Status: ' + item.status;
+		// section.appendChild(status);		
+		
+		// description
+		var description = $('p', {
+			className : 'item-description'
+		});	
+		description.innerHTML = '*Description: ' + '<br/>' + item.description;
+		section.appendChild(description);
+		
+		// // generalInfo
+		// var generalInfo = $('p', {
+		// 	className : 'item-generalInfo'
+		// });	
+		// generalInfo.innerHTML = '*General Rule: ' + '<br/>' + item.generalInfo;
+		// section.appendChild(generalInfo);
 
         // stars: used for rating 
         // here we might have a problem showing 3.5 as 3.
@@ -510,13 +535,14 @@
             }));
         }
         section.appendChild(stars);
+
         li.appendChild(section);
 
         // address
         var address = $('p', {
             className : 'item-address'
         });
-        address.innerHTML = item.address.replace(/,/g, '<br/>').replace(/\"/g, '') + item.city + ', ' + item.state + ' ' + item.zipcode;
+        address.innerHTML = item.address.replace(/,/g, '<br/>').replace(/\"/g, '') + item.city + ', </br>' + item.state + '</br>' + item.zipcode;
         li.appendChild(address);
 
         // favorite link

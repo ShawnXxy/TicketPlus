@@ -128,6 +128,10 @@ public class MySQLConnection implements DBConnection {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, item.getItemId());
             statement.setString(2, item.getName());
+//            statement.setString(3, item.getDate());
+//            statement.setString(4, item.getTime());
+//            statement.setString(5, item.getRemainingTickets());
+//            statement.setString(6, item.getSaleStatus());
             statement.setString(3, item.getCity());
             statement.setString(4, item.getState());
             statement.setString(5, item.getCountry());
@@ -196,6 +200,10 @@ public class MySQLConnection implements DBConnection {
                 if (rs.next()) {
                   builder.setItemId(rs.getString("item_id"));
                   builder.setName(rs.getString("name"));
+//                  builder.setDate(rs.getString("date"));
+//                  builder.setTime(rs.getString("time"));
+//                  builder.setRemainingTickets(rs.getString("remaining_tickets"));
+//                  builder.setSaleStatus(rs.getString("sale_status"));
                   builder.setCity(rs.getString("city"));
                   builder.setState(rs.getString("state"));
                   builder.setCountry(rs.getString("country"));
