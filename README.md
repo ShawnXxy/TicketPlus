@@ -1,4 +1,4 @@
-# Foodies
+# TicketPlus
 
 Aims to use personalization to improve Event Search and Ticket Recommendation.
 
